@@ -1,7 +1,7 @@
 use super::point::Point;
-// use rand::Rng;
+use rand::Rng;
 use crate::geometrical_shapes::{ Displayable, Drawable };
-// use raster::Color;
+use raster::{Color, Image};
 pub struct Line {
     a: Point,
     b: Point,
@@ -22,48 +22,52 @@ impl Line {
 }
 
 impl Drawable for Line {
-    // Bresenham's Line Drawing Algorithm
     fn draw(&self, image: &mut raster::Image) {
-        let x0 = self.a.x;
-        let y0 = self.a.y;
-        let x1 = self.b.x;
-        let y1 = self.b.y;
-
-        let dx = (x1 - x0).abs(); // d short for delta
-        let dy = -(y1 - y0).abs();
-        let sx = if x0 < x1 { 1 } else { -1 }; // s short for step
-        let sy = if y0 < y1 { 1 } else { -1 };
-        let mut parametre_de_decision = dx + dy;
-        let mut x = x0;
-        let mut y = y0;
         let color = self.color();
+        draw_line(image, &self.a, &self.b, color);
+    }
+}
 
-        loop {
-            // Draw the current pixel at (x, y)
-            image.display(x, y, color.clone()); // put pixel
+// Bresenham's Line Drawing Algorithm
+pub fn draw_line(image: &mut Image, a: &Point, b: &Point, color: Color) {
+    let x0 = a.x;
+    let y0 = a.y;
+    let x1 = b.x;
+    let y1 = b.y;
 
-            // Check if we've reached the end point - if so, we're done
-            if x == x1 && y == y1 {
-                break;
-            }
+    let dx = (x1 - x0).abs(); // d short for delta
+    let dy = -(y1 - y0).abs();
+    let sx = if x0 < x1 { 1 } else { -1 }; // s short for step
+    let sy = if y0 < y1 { 1 } else { -1 };
+    let mut parametre_de_decision = dx + dy;
+    let mut x = x0;
+    let mut y = y0;
 
-            // Calculate twice the error to avoid floating point arithmetic
-            // This determines which direction(s) to step next
-            let p = 2 * parametre_de_decision;
+    loop {
+        // Draw the current pixel at (x, y)
+        image.display(x, y, color.clone()); // put pixel
 
-            // If the error suggests we're too far below the ideal line,
-            // step in the x direction to get closer to the target
-            if p >= dy {
-                parametre_de_decision += dy;
-                x += sx;
-            }
+        // Check if we've reached the end point - if so, we're done
+        if x == x1 && y == y1 {
+            break;
+        }
 
-            // If the error suggests we're too far to the side of the ideal line,
-            // step in the y direction to get closer to the target
-            if p <= dx {
-                parametre_de_decision += dx;
-                y += sy;
-            }
+        // Calculate twice the error to avoid floating point arithmetic
+        // This determines which direction(s) to step next
+        let p = 2 * parametre_de_decision;
+
+        // If the error suggests we're too far below the ideal line,
+        // step in the x direction to get closer to the target
+        if p >= dy {
+            parametre_de_decision += dy;
+            x += sx;
+        }
+
+        // If the error suggests we're too far to the side of the ideal line,
+        // step in the y direction to get closer to the target
+        if p <= dx {
+            parametre_de_decision += dx;
+            y += sy;
         }
     }
 }

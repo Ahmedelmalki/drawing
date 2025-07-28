@@ -20,12 +20,9 @@ impl Triangle {
 
 impl Drawable for Triangle {
     fn draw(&self, image: &mut raster::Image) {
-        // todo : group the line drwaing algo in a separated func so u can use it here to get a triangle with same color
-        let line1 = Line::new(&self.a, &self.b);
-        let line2 = Line::new(&self.a, &self.c);
-        let line3 = Line::new(&self.b, &self.c);
-        line1.draw(image);
-        line2.draw(image);
-        line3.draw(image);
+        let color = self.color();
+        draw_line(image, &self.a, &self.b, color.clone());
+        draw_line(image, &self.a, &self.c, color.clone());
+        draw_line(image, &self.b, &self.c, color.clone());
     }
 }

@@ -12,25 +12,21 @@ pub struct Rectangle {
 impl Rectangle {
     pub fn new(p1: &Point, p2: &Point) -> Self {
         Rectangle {
-            a: *p1,  
+            a: *p1,
             b: *p2,
-        }   
+        }
     }
 }
 
 impl Drawable for Rectangle {
     fn draw(&self, image: &mut raster::Image) {
-        
+        let color = self.color();
         let point_c = &Point::new(self.a.x, self.b.y);
         let point_d = &Point::new(self.b.x, self.a.y);
 
-        let line1 = Line::new(&self.a, point_c);
-        let line2 = Line::new(&self.a, point_d);
-        let line3 = Line::new(point_c, &self.b);
-        let line4 = Line::new(point_d, &self.b);
-        line1.draw(image);
-        line2.draw(image);
-        line3.draw(image);
-        line4.draw(image);
+        draw_line(image, &self.a, point_c, color.clone());
+        draw_line(image, &self.a, point_d, color.clone());
+        draw_line(image, point_c, &self.b, color.clone());
+        draw_line(image, point_d, &self.b, color.clone());
     }
 }
