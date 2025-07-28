@@ -28,11 +28,4 @@ impl Drawable for Triangle {
         line2.draw(image);
         line3.draw(image);
     }
-    // fn color(&self) -> raster::Color { // todo : remove this
-    //     let mut rng = rand::rng();
-    //     let r = rng.random_range(0..255);
-    //     let g = rng.random_range(0..255);
-    //     let b = rng.random_range(0..255);
-    //     Color::rgb(r, g, b)
-    // }
 }

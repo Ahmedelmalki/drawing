@@ -12,8 +12,8 @@ pub struct Rectangle {
 impl Rectangle {
     pub fn new(p1: &Point, p2: &Point) -> Self {
         Rectangle {
-            a: p1.clone(),  // Clone the points to own them
-            b: p2.clone(),
+            a: *p1,  
+            b: *p2,
         }   
     }
 }

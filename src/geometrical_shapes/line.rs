@@ -9,8 +9,8 @@ pub struct Line {
 impl Line {
     pub fn new(start: &Point, end: &Point) -> Self {
         Line {
-            a: start.clone(),
-            b: end.clone(),
+            a: *start,
+            b: *end,
         }
     }
     pub fn random(width: i32, height: i32) -> Self {
@@ -66,11 +66,4 @@ impl Drawable for Line {
             }
         }
     }
-    // fn color(&self) -> raster::Color;{} /*{
-    //         let mut rng = rand::rng();
-    //         let r = rng.random_range(0..255);
-    //         let g = rng.random_range(0..255);
-    //         let b = rng.random_range(0..255);
-    //         Color::rgb(r, g, b)
-    //     }*/
 }

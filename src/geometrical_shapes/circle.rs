@@ -55,11 +55,4 @@ impl Drawable for Circle {
         }
         
     }
-    // fn color(&self) -> Color {
-    //     let mut rng = rand::rng();
-    //     let r = rng.random_range(0..255);
-    //     let g = rng.random_range(0..255);
-    //     let b = rng.random_range(0..255);
-    //     Color::rgb(r, g, b)
-    // }
 }
