@@ -1,5 +1,4 @@
 use crate::geometrical_shapes::{Displayable, Drawable};
-// use raster::Color;
 use super::point::Point;
 use rand::Rng;
 

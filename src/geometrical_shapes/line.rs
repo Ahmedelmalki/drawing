@@ -1,7 +1,7 @@
 use super::point::Point;
 use rand::Rng;
 use crate::geometrical_shapes::{ Displayable, Drawable };
-use raster::{Color, Image};
+use raster::{ Color, Image };
 pub struct Line {
     a: Point,
     b: Point,
@@ -44,27 +44,15 @@ pub fn draw_line(image: &mut Image, a: &Point, b: &Point, color: Color) {
     let mut y = y0;
 
     loop {
-        // Draw the current pixel at (x, y)
-        image.display(x, y, color.clone()); // put pixel
-
-        // Check if we've reached the end point - if so, we're done
+        image.display(x, y, color.clone());
         if x == x1 && y == y1 {
             break;
         }
-
-        // Calculate twice the error to avoid floating point arithmetic
-        // This determines which direction(s) to step next
         let p = 2 * parametre_de_decision;
-
-        // If the error suggests we're too far below the ideal line,
-        // step in the x direction to get closer to the target
         if p >= dy {
             parametre_de_decision += dy;
             x += sx;
         }
-
-        // If the error suggests we're too far to the side of the ideal line,
-        // step in the y direction to get closer to the target
         if p <= dx {
             parametre_de_decision += dx;
             y += sy;
