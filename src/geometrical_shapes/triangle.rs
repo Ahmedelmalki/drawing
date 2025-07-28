@@ -13,9 +13,9 @@ pub struct Triangle{
 impl  Triangle {
     pub fn new(a: &Point, b: &Point, c: &Point)-> Self{
         Triangle {
-            a: a.clone(),
-            b:b.clone(),
-            c:c.clone()
+            a: *a,
+            b:*b,
+            c:*c,
         }
     }
 }
@@ -30,7 +30,7 @@ impl Drawable for Triangle {
         line2.draw(image);
         line3.draw(image);
     }
-    fn color(&self) -> raster::Color {
+    fn color(&self) -> raster::Color { // todo : remove this
         let mut rng = rand::rng();
         let r = rng.random_range(0..255);
         let g = rng.random_range(0..255);
