@@ -15,8 +15,16 @@ pub trait Displayable {
     fn display(&mut self, x: i32, y: i32, color: Color);
 }
 
+// module declaretion
 pub mod circle;
 pub mod line;
 pub mod point;
 pub mod triangle;
 pub mod rectangle;
+
+// module export
+pub use point::Point;
+pub use line::Line;
+pub use rectangle::Rectangle;
+pub use triangle::Triangle;
+pub use circle::Circle;

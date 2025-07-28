@@ -1,6 +1,6 @@
 
 use crate::geometrical_shapes::{Displayable, Drawable};
-use raster::Color;
+// use raster::Color;
 use rand::Rng;
 #[derive(Copy, Clone)]
 pub struct Point {
@@ -24,11 +24,11 @@ impl Drawable for Point {
     fn draw(&self, image: &mut raster::Image) {
         image.display(self.x, self.y, self.color());
     }
-    fn color(&self) -> Color {
-        let mut rng = rand::rng();
-        let r = rng.random_range(0..255);
-        let g = rng.random_range(0..255);
-        let b = rng.random_range(0..255);
-        Color::rgb(r, g, b)
-    }
+    // fn color(&self) -> Color { // default function
+    //     let mut rng = rand::rng();
+    //     let r = rng.random_range(0..255);
+    //     let g = rng.random_range(0..255);
+    //     let b = rng.random_range(0..255);
+    //     Color::rgb(r, g, b)
+    // }
 }
